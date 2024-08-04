@@ -5,13 +5,127 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <title>Our Story - GroWonder</title>
+  <title>GroWonder</title>
 
   <style>
+    .popup-form {
+      display: none;
+      position: fixed;
+      z-index: 3;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(3px);
+    }
 
+    /* Popup content */
+    .popup-content {
+      background-color: #fff;
+      margin: 7% auto;
+      padding: 72px 110px 24px 110px;
+      width: 880px;
+      height: 590px;
+      border-radius: 40px;
+      position: relative;
+    }
+
+    /* Close button */
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .popup-input {
+      width: 400px;
+    }
+
+    .popup-select {
+      width: 434px;
+      padding: auto;
+    }
+
+    .input-container select {
+      margin-bottom: 0;
+    }
+
+    .popup-content textarea {
+      padding: 16px;
+      height: 100px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(217, 217, 217, 0.85);
+      background: #FFF;
+      outline: none;
+      transition: border-color 0.3s;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .input-container input {
+      margin-bottom: 0;
+    }
+
+    .btn-tertiary {
+      color: black;
+      margin: auto;
+      box-shadow: 0px 1px 4px 0px rgba(30, 41, 59, 0.30);
+      display: flex;
+      width: 320px;
+      padding: 7px 13px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+      height: 30px;
+    }
+
+    /* input file style */
+    .input-file {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .input-file+.js-labelFile {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-plus {
+      font-size: 13.5px;
+      color: #ff7415;
+      content: "\f00c";
+    }
+
+    .input-file+.js-labelFile.has-file .icon-plus:before {
+      content: "\f00c";
+    }
   </style>
-
 </head>
 
 <body>
@@ -187,9 +301,77 @@
               </div>
             </div>
           </div>
-          <button class="main-button">
+          <button id="openFormBtn" class="main-button">
             <p class="contact-us">Contact Us</p>
           </button>
+          <div id="popupForm" class="popup-form">
+            <div class="popup-content">
+              <div style="gap: 8px;text-align: center;">
+                <span class="close" id="closeFormBtn">&times;</span>
+                <p style="font-size: 50px;
+                font-style: normal;
+                font-weight: 500;">Join us in our Journey!</p>
+                <p style="font-size: 20px;
+                font-style: normal;
+                font-weight: 400;color: rgba(112, 112, 112, 0.80);">Leave your Details and we will contact you!</p>
+              </div>
+              <div style="margin-top: 30px;">
+                <form action="#" style="display: flex; flex-direction: column;gap: 20px;align-items: center;">
+                  <div style="display: flex; flex-direction: row;gap: 16px;">
+                    <div style="display: flex; flex-direction: column;gap: 20px;">
+                      <div class="input-container">
+                        <input type="text" id="BusinessName" placeholder=" " class="popup-input">
+                        <label for="BusinessName">Business Name</label>
+                      </div>
+                      <div class="input-container">
+                        <input type="text" id="BusinessEmail" placeholder=" " class="popup-input">
+                        <label for="BusinessEmail">Business Email</label>
+                      </div>
+                      <div class="input-container">
+                        <select id="BusinessType" class="popup-select">
+                          <option value=" " hidden selected></option>
+                          <option value="PrivateDoctor">Private Doctor</option>
+                          <option value="MentalHealth">Mental health Service</option>
+                          <option value="Clinic">Clinic</option>
+                          <option value="MedicalCenter">Medical Center</option>
+                          <!-- Add more options here -->
+                        </select>
+                        <label for="BusinessType">Business Type</label>
+                      </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column;gap: 20px;">
+                      <div class="input-container">
+                        <input type="text" id="PhoneNumber" placeholder=" " class="popup-input">
+                        <label for="PhoneNumber">Phone Number</label>
+                      </div>
+                      <div class="input-container">
+                        <input type="text" id="BusinessAddress" placeholder=" " class="popup-input">
+                        <label for="BusinessAddress">Business Address</label>
+                      </div>
+                      <div>
+                        <input type="file" name="file" id="file" class="input-file">
+                        <label for="file" class="btn btn-tertiary js-labelFile">
+                          <span class="js-fileName" style="font-size: 16px;
+                          font-style: normal;
+                          font-weight: 400;">Upload file</span>
+                          <icon class="fas fa-plus icon-plus"></icon>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <textarea name="message" placeholder="Leave a message"
+                    style="margin-bottom: 10px;width: 96.5%;"></textarea>
+                  <button type="submit"
+                    style="padding: 16px 8px;width: 220px;border-radius: 10px;background: #FF7415;outline: unset;border: 0px;">
+                    <p style="font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;color: #FFF;font-family: DM Sans">Submit
+                      Form</p>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -310,6 +492,7 @@
       </div>
     </div>
   </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     const input = document.getElementById('dropdown-input');
     const dropdownMenu = document.getElementById('dropdown-menu');
@@ -334,6 +517,57 @@
     function scrollToSection(section) {
       document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
     }
+
+    var popupForm = document.getElementById("popupForm");
+
+    // Get the button that opens the modal
+    var openFormBtn = document.getElementById("openFormBtn");
+
+    // Get the <span> element that closes the modal
+    var closeFormBtn = document.getElementById("closeFormBtn");
+
+    // When the user clicks the button, open the modal 
+    openFormBtn.onclick = function () {
+      popupForm.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeFormBtn.onclick = function () {
+      popupForm.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == popupForm) {
+        popupForm.style.display = "none";
+      }
+    }
+
+
+  </script>
+  <script>
+      (function () {
+        'use strict';
+
+        $('.input-file').each(function () {
+          var $input = $(this),
+            $label = $input.next('.js-labelFile'),
+            labelVal = $label.find('.js-fileName').html();
+
+          $input.on('change', function () {
+            var fileName = '';
+            if ($input[0].files.length > 0) {
+              fileName = $input[0].files[0].name;
+            }
+            if (fileName) {
+              $label.addClass('has-file').find('.js-fileName').html(fileName);
+            } else {
+              $label.removeClass('has-file').find('.js-fileName').html(labelVal);
+            }
+          });
+        });
+
+      })();
   </script>
 </body>
 
