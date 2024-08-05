@@ -125,6 +125,26 @@
     .input-file+.js-labelFile.has-file .icon-plus:before {
       content: "\f00c";
     }
+
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      font-size: 2em;
+      justify-content: center;
+    }
+
+    .star {
+      cursor: pointer;
+      color: lightgray;
+      transition: color 0.2s;
+    }
+
+    .star:hover,
+    .star:hover~.star,
+    .star.selected,
+    .star.selected~.star {
+      color: #FF7415;
+    }
   </style>
 </head>
 
@@ -389,30 +409,43 @@
           <p class="reviews-title">Hey!</p>
           <p class="reviews-subtitle">We'd love to hear from you</p>
         </div>
-        <div class="input-container">
-          <input type="text" id="username" placeholder=" " required class="input-default">
-          <label for="username">Username</label>
-        </div>
-        <div class="input-container">
-          <input type="text" id="comment" placeholder=" " required class="input-default">
-          <label for="comment">Leave a message!</label>
-        </div>
-        <div class="input-container">
-          <input type="text" readonly id="dropdown-input" class="input-default" placeholder=" ">
-          <label for="dropdown-input">Your kid's diagnosis</label>
-          <img style="position: absolute;right: 10px; width: 25px; top:18px;right: 12px;cursor: pointer;"
-            src="assets/chevron-down.png" />
-          <div class="dropdown-content" id="dropdown-menu">
-            <p data-value="ADHD">ADHD</p>
-            <p data-value="Autism">Autism</p>
-            <p data-value="ADD">ADD</p>
-            <p data-value="Medical Center">Medical Center</p>
+        <form style="display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 39px;">
+          <div class="star-rating">
+            <span class="star" data-value="5">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="1">&#9733;</span>
           </div>
-        </div>
+          <input type="hidden" name="rating" id="rating-value" value="">
+          <div class="input-container">
+            <input type="text" id="username" placeholder=" " required class="input-default">
+            <label for="username">Username</label>
+          </div>
+          <div class="input-container">
+            <input type="text" readonly id="dropdown-input" class="input-default" placeholder=" ">
+            <label for="dropdown-input">Your kid's diagnosis</label>
+            <img style="position: absolute;right: 10px; width: 25px; top:18px;right: 12px;cursor: pointer;"
+              src="assets/chevron-down.png" />
+            <div class="dropdown-content" id="dropdown-menu">
+              <p data-value="ADHD">ADHD</p>
+              <p data-value="Autism">Autism</p>
+              <p data-value="ADD">ADD</p>
+              <p data-value="Medical Center">Medical Center</p>
+            </div>
+          </div>
+          <div class="input-container">
+            <input type="text" id="comment" placeholder=" " required class="input-default">
+            <label for="comment">Leave a message!</label>
+          </div>
 
-        <button class="reviews-button">
-          <p>Submit review</p>
-        </button>
+          <button type="submit" class="reviews-button">
+            <p>Submit review</p>
+          </button>
+        </form>
       </div>
     </div>
 
@@ -543,31 +576,46 @@
       }
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
+      const stars = document.querySelectorAll('.star');
+      stars.forEach(star => {
+        star.addEventListener('click', selectStar);
+      });
 
+      function selectStar(e) {
+        const value = e.target.getAttribute('data-value');
+        stars.forEach(star => {
+          star.classList.remove('selected');
+          if (star.getAttribute('data-value') <= value) {
+            star.classList.add('selected');
+          }
+        });
+      }
+    });
   </script>
   <script>
-      (function () {
-        'use strict';
+    (function () {
+      'use strict';
 
-        $('.input-file').each(function () {
-          var $input = $(this),
-            $label = $input.next('.js-labelFile'),
-            labelVal = $label.find('.js-fileName').html();
+      $('.input-file').each(function () {
+        var $input = $(this),
+          $label = $input.next('.js-labelFile'),
+          labelVal = $label.find('.js-fileName').html();
 
-          $input.on('change', function () {
-            var fileName = '';
-            if ($input[0].files.length > 0) {
-              fileName = $input[0].files[0].name;
-            }
-            if (fileName) {
-              $label.addClass('has-file').find('.js-fileName').html(fileName);
-            } else {
-              $label.removeClass('has-file').find('.js-fileName').html(labelVal);
-            }
-          });
+        $input.on('change', function () {
+          var fileName = '';
+          if ($input[0].files.length > 0) {
+            fileName = $input[0].files[0].name;
+          }
+          if (fileName) {
+            $label.addClass('has-file').find('.js-fileName').html(fileName);
+          } else {
+            $label.removeClass('has-file').find('.js-fileName').html(labelVal);
+          }
         });
+      });
 
-      })();
+    })();
   </script>
 </body>
 
