@@ -774,10 +774,7 @@ a {
 
 /* Footer Image */
 .footer-image {
-    aspect-ratio: 5.26;
-    object-fit: cover;
-    width: 100%;
-    max-width: 393px;
+    width: 25vw;
 }
 
 /* Links Container */
@@ -818,8 +815,10 @@ a {
 
 /* Footer Notes */
 .footer-notes {
-    align-self: start;
     margin: 1.875rem 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     /* 30px */
 }
 

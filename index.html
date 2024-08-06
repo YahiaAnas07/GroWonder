@@ -504,13 +504,15 @@
   <section class="footer-container">
     <div class="wrapper">
       <div class="content-container">
-        <div class="flex-container">
+        <div style="width: 50vw;display: flex;flex-direction: row;justify-content: center;">
           <img loading="lazy" src="assets/Vector.png" alt="Description of the image" class="footer-image" />
+        </div>
+        <div style="width: 50vw;display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
           <div class="links-container">
             <div class="link-header">Site Map</div>
-            <a class="link-item">Our Solutions</a>
-            <a class="link-item">FAQS</a>
-            <a class="link-item">Resources</a>
+            <a class="link-item" href="javascript:void(0);" onclick="scrollToSection('solutions')">Our Solutions</a>
+            <a class="link-item" href="javascript:void(0);" onclick="scrollToSection('faqs')">FAQS</a>
+            <a class="link-item" href="#">Resources</a>
           </div>
           <div class="social-container">
             <div class="social-header">Our Socials</div>
@@ -521,9 +523,14 @@
         </div>
       </div>
       <div class="footer-notes">
+        <div>
         <a href="#" class="link">Privacy Policy</a> |
         <a href="#" class="link">Terms of Use</a> |
         © 2024 All Rights Reserved
+      </div>
+      <div>
+        <p style="color: #7f28ff;">GroWonder@gmail.com</p>
+      </div>
       </div>
     </div>
   </section>
