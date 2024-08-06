@@ -43,13 +43,6 @@ a {
     justify-content: space-between;
 }
 
-@media (max-width: 991px) {
-    .header {
-        flex-direction: column;
-        margin-left: 0;
-        align-items: center;
-    }
-}
 
 .logo {
     object-fit: cover;
@@ -67,13 +60,6 @@ a {
     align-items: center;
 }
 
-@media (max-width: 991px) {
-    .nav-container {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
 .signup-button {
     border-radius: 0.9375rem;
     /* Use rem for scalable radius */
@@ -85,12 +71,6 @@ a {
     /* Use rem for scalable padding */
 }
 
-@media (max-width: 991px) {
-    .signup-button {
-        align-self: center;
-        margin-top: 0.9375rem;
-    }
-}
 
 .profile-image {
     object-fit: cover;
@@ -117,14 +97,6 @@ a {
     margin: 0;
 }
 
-@media (max-width: 991px) {
-    .hero-title {
-        width: 90%;
-        font-size: 3.75rem;
-        /* Use rem for scalable font size */
-    }
-}
-
 .hero-description {
     text-align: center;
     color: #0c0c0c;
@@ -134,14 +106,6 @@ a {
     /* Use rem for scalable font size */
     font-weight: 400;
     margin: 0;
-}
-
-@media (max-width: 991px) {
-    .hero-description {
-        width: 90%;
-        font-size: 1.25rem;
-        /* Use rem for scalable font size */
-    }
 }
 
 .cta-container {
@@ -158,14 +122,6 @@ a {
     font-weight: 500;
 }
 
-@media (max-width: 991px) {
-    .cta-container {
-        flex-direction: column;
-        width: 90%;
-        margin: 2.5rem 0;
-    }
-}
-
 .cta-button {
     width: 40vw;
     /* Use viewport width for responsive width */
@@ -177,25 +133,11 @@ a {
     padding: 1.125rem;
 }
 
-@media (max-width: 991px) {
-    .cta-button {
-        width: 100%;
-        padding: 0.625rem;
-    }
-}
-
 .cta-link {
     color: #7f28ff;
     width: 30vw;
     /* Use viewport width for responsive width */
     margin: auto 0;
-}
-
-@media (max-width: 991px) {
-    .cta-link {
-        width: 100%;
-        text-align: center;
-    }
 }
 
 .section-container {
@@ -205,12 +147,6 @@ a {
     margin-top: 100px;
 }
 
-@media (max-width: 991px) {
-    .section-container {
-        height: auto;
-        padding: 1.25rem 0;
-    }
-}
 
 .story-container {
     display: flex;
@@ -227,13 +163,6 @@ a {
     /* Use viewport height for responsive height */
 }
 
-@media (max-width: 991px) {
-    .story-container {
-        padding: 1.25rem;
-        height: auto;
-        gap: 1.25rem;
-    }
-}
 
 .story-container p {
     max-width: 37vw;
@@ -259,14 +188,6 @@ a {
     margin: 0px;
 }
 
-@media (max-width: 991px) {
-    .story-subtitle {
-        font-size: 2.5rem;
-        /* Use rem for scalable font size */
-        height: auto;
-        line-height: normal;
-    }
-}
 
 .story-text {
     font-size: 1.25rem;
@@ -277,12 +198,6 @@ a {
     /* Use viewport width for responsive width */
 }
 
-@media (max-width: 991px) {
-    .story-text {
-        font-size: 1rem;
-        /* Use rem for scalable font size */
-    }
-}
 
 .story-author {
     font-size: 0.875rem;
@@ -298,14 +213,6 @@ a {
     height: auto;
     border-radius: 4.25rem;
     margin-left: 1.25rem;
-}
-
-@media (max-width: 991px) {
-    .story-image {
-        width: 100%;
-        height: auto;
-        margin-left: 0;
-    }
 }
 
 .story-icons {
@@ -331,11 +238,6 @@ a {
     padding: 0 5vw;
 }
 
-@media (max-width: 991px) {
-    .main-container {
-        padding: 5vw 0;
-    }
-}
 
 /* Our Solutions */
 .our-solutions {
@@ -355,15 +257,6 @@ a {
     background-size: cover;
 }
 
-@media (max-width: 991px) {
-    .ellipse {
-        width: 30vw;
-        height: 30vw;
-        top: auto;
-        right: 0;
-        bottom: 0;
-    }
-}
 
 /* Rectangle 1 */
 .rectangle-2,
@@ -380,14 +273,7 @@ a {
     padding-top: 5vw;
 }
 
-@media (max-width: 991px) {
-    .rectangle-1 {
-        width: 90%;
-        height: auto;
-        padding: 2vw;
-        margin-bottom: 2vw;
-    }
-}
+
 
 .rectangle-2-title,
 .rectangle-1-title {
@@ -396,12 +282,7 @@ a {
     font-weight: 500;
 }
 
-@media (max-width: 991px) {
-    .rectangle-1-title {
-        font-size: 1.875rem;
-        /* 30px */
-    }
-}
+
 
 .rectangle-2-subtitle,
 .rectangle-1-subtitle {
@@ -421,11 +302,6 @@ a {
     /* 24px */
 }
 
-@media (max-width: 991px) {
-    .rectangle-1-text {
-        width: 100%;
-    }
-}
 
 /* What to Expect */
 .what-to-expect {
@@ -463,25 +339,11 @@ a {
     width: 35%;
 }
 
-@media (max-width: 991px) {
-    .rectangle-2 {
-        width: 90%;
-        height: auto;
-        padding: 2vw;
-        margin-bottom: 2vw;
-    }
-}
-
 .rectangle-2-title {
     color: #ff7415;
 }
 
-@media (max-width: 991px) {
-    .rectangle-2-title {
-        font-size: 1.5625rem;
-        /* 25px */
-    }
-}
+
 
 /* Main Buttons */
 .main-button,
@@ -508,28 +370,6 @@ a {
     background: #7f28ff;
     margin-left: 1.5625rem;
     /* 25px */
-}
-
-@media (max-width: 991px) {
-
-    .main-button,
-    .main-button2 {
-        width: 100%;
-    }
-
-    .main-button2 {
-        margin-left: 0;
-    }
-}
-
-/* Contact Us */
-
-
-@media (max-width: 991px) {
-    .contact-us {
-        font-size: 1.5rem;
-        /* 24px */
-    }
 }
 
 /* Reviews Section */
@@ -656,6 +496,7 @@ a {
     box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
+
 /* Reviews Button */
 .reviews-button {
     display: flex;
@@ -822,11 +663,260 @@ a {
     /* 30px */
 }
 
-@media (max-width: 991px) {
+/* Styles for small laptops */
+@media (max-width: 1024px) {
+    .header {
+        margin-left: 2rem;
+        /* Reduce margin for smaller screens */
+    }
 
-    /* Adjustments for small screens */
-    .footer-notes {
-        margin: 1.875rem 0 0 0;
-        /* 30px */
+    .hero-title,
+    .section-title {
+        font-size: 2.5rem;
+        /* Adjust font size */
+        width: 80%;
+        /* Adjust width */
+    }
+
+    .hero-description {
+        font-size: 1.5rem;
+        /* Adjust font size */
+        width: 80%;
+        /* Adjust width */
+    }
+
+    .cta-container {
+        width: 80%;
+        /* Adjust width */
+    }
+
+    .story-container {
+        padding-left: 1rem;
+        /* Reduce padding */
+        padding-top: 2rem;
+        /* Reduce padding */
+    }
+
+    .main-container {
+        padding: 0 2vw;
+    }
+
+    .our-solutions {
+        font-size: 2.5rem;
+        /* 40px */
+    }
+
+    .rectangle-1,
+    .rectangle-2 {
+        width: 100%;
+        /* Full width on smaller screens */
+        max-width: none;
+        /* Remove max-width */
+    }
+
+    .rectangle-2 {
+        margin-top: 2rem;
+        /* Space between rectangles */
+    }
+
+    .main-button,
+    .main-button2 {
+        width: 90%;
+        /* Full width for buttons */
+    }
+
+    .reviews-section {
+        padding-bottom: 5vw;
+    }
+
+    .reviews-title {
+        font-size: 2.5rem;
+        /* 40px */
+    }
+
+    .reviews-subtitle {
+        font-size: 1.125rem;
+        /* 18px */
+    }
+
+    .input-default {
+        width: 80%;
+        /* Wider input fields */
+    }
+
+    .big-questions {
+        font-size: 2.5rem;
+        /* 40px */
+        padding: 4vw 3vw;
+    }
+
+    .question-item {
+        flex-direction: column;
+        /* Stack items */
+        padding: 1.5rem 2rem;
+        /* Adjust padding */
+    }
+
+    .question-text {
+        font-size: 2rem;
+        /* 32px */
+    }
+
+    .footer-container {
+        font-size: 1rem;
+        /* 16px */
+        padding: 4vw 3vw 2vw;
+    }
+
+    .content-container {
+        padding: 4vw 3vw;
+    }
+
+    .flex-container {
+        flex-direction: column;
+        /* Stack items */
+        gap: 1rem;
+        /* Adjust gap */
+    }
+
+    .footer-image {
+        width: 50vw;
+        /* Adjust footer image size */
+    }
+}
+
+/* Styles for mobile devices */
+@media (max-width: 600px) {
+    body{
+        flex:1;
+    }
+    .header {
+        flex-direction: column;
+        /* Stack header items */
+        align-items: center;
+        /* Center align */
+        margin-left: 0;
+        /* Remove left margin */
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        /* Adjust font size */
+        width: 100%;
+        /* Full width */
+    }
+
+    .hero-description {
+        font-size: 1.25rem;
+        /* Adjust font size */
+        width: 100%;
+        /* Full width */
+    }
+
+    .cta-container {
+        flex-direction: column;
+        /* Stack buttons */
+        width: 90%;
+        /* Adjust width */
+    }
+
+    .story-title {
+        font-size: 2rem;
+        /* Adjust font size */
+    }
+
+    .story-subtitle {
+        font-size: 3rem;
+        /* Adjust font size */
+    }
+
+    .story-text {
+        font-size: 1rem;
+        /* Adjust font size */
+    }
+
+    .story-author {
+        font-size: 0.75rem;
+        /* Adjust font size */
+    }
+
+    .main-container {
+        padding: 0 1vw;
+    }
+
+    .our-solutions {
+        font-size: 2rem;
+        /* 32px */
+    }
+
+    .rectangle-1,
+    .rectangle-2 {
+        flex-direction: column;
+        /* Stack rectangles */
+        margin-bottom: 1.5rem;
+        /* Space between stacked items */
+    }
+
+    .main-button,
+    .main-button2 {
+        width: 100%;
+        /* Full width buttons */
+    }
+
+    .reviews-title {
+        font-size: 2rem;
+        /* 32px */
+    }
+
+    .reviews-subtitle {
+        font-size: 1rem;
+        /* 16px */
+    }
+
+    .input-default {
+        width: 100%;
+        /* Full width inputs */
+    }
+
+    .tips {
+        font-size: 14px;
+        /* Smaller tips text */
+    }
+
+    .big-questions {
+        font-size: 2rem;
+        /* 32px */
+        padding: 3vw 2vw;
+    }
+
+    .question-item {
+        padding: 1rem;
+        /* Reduce padding */
+    }
+
+    .question-text {
+        font-size: 1.5rem;
+        /* 24px */
+    }
+
+    .footer-container {
+        font-size: 0.875rem;
+        /* 14px */
+        padding: 3vw 2vw 2vw;
+    }
+
+    .content-container {
+        padding: 4vw 2vw;
+        /* Adjust padding */
+    }
+
+    .flex-container {
+        gap: 0.5rem;
+        /* Adjust gap */
+    }
+
+    .footer-image {
+        width: 70vw;
+        /* Adjust footer image size */
     }
 }
