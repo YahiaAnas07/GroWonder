@@ -52,12 +52,7 @@
     }
 
     .popup-input {
-      width: 400px;
-    }
-
-    .popup-select {
-      width: 434px;
-      padding: auto;
+      width: 21vw;
     }
 
     .input-container select {
@@ -150,7 +145,7 @@
     }
 
     .input-container select {
-      width: 27vw;
+      width: 23vw;
     }
   </style>
 </head>
@@ -536,26 +531,7 @@
   </section>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    const input = document.getElementById('dropdown-input');
-    const dropdownMenu = document.getElementById('dropdown-menu');
 
-    input.addEventListener('click', function () {
-      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    });
-
-    dropdownMenu.addEventListener('click', function (event) {
-      if (event.target.tagName === 'P') {
-        input.value = event.target.getAttribute('data-value');
-        dropdownMenu.style.display = 'none'; // Hide the dropdown after selection
-      }
-    });
-
-    // Optional: Hide dropdown when clicking outside
-    window.addEventListener('click', function (e) {
-      if (!input.contains(e.target) && !dropdownMenu.contains(e.target)) {
-        dropdownMenu.style.display = 'none';
-      }
-    });
     function scrollToSection(section) {
       document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
     }
