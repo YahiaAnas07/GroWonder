@@ -41,6 +41,7 @@ a {
     /* Use rem for scalable font size */
     color: #0c0c0c;
     justify-content: space-between;
+    font-weight: 500;
 }
 
 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <link rel="stylesheet" href="mainStyle.css" />
+        <title>Resources Page</title>
+        <style>
+        .filterbox {
+            padding: 8px 16px;
+            border: 1.5px solid rgba(112, 112, 112, 0.5);
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .filterbox p {
+            margin: 0;
+            font-size: 14px;
+            color: #707070;
+        }
+
+        .filterbox.active {
+            border-color: #6d4bf4;
+            background-color: #f8f5ff;
+            color: #6d4bf4;
+        }
+
+        .filterbox:hover {
+            border-color: #6d4bf4;
+            color: #6d4bf4;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(112, 112, 112, 0.5);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border: 2px solid #c8c8c8;
+            border-radius: 3px;
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #6d4bf4;
+            border-color: #6d4bf4;
+        }
+    </style>
+    </head>
+
+    <body style="background: var(--Blue-light, #f0f6ff);margin-bottom: 200px;">
+        <nav class="header">
+            <img loading="lazy" src="assets/Vector.png" class="logo"
+                alt="GroWonder logo" />
+            <div class="nav-container">
+                <a href="./index.html#whoWeAre" class="nav-link">Who We are</a>
+                <a href="./index.html#solutions" class="nav-link">Our Solutions</a>
+                <a href="./index.html#faqs" class="nav-link">FAQS</a>
+                <a href="" class="nav-link">Resources</a>
+                <a href="./signIn.html" class="signup-button">Sign In</a>
+                <img loading="lazy" src="assets/Ellipse5.png"
+                    class="profile-image" alt="User profile" />
+            </div>
+        </nav>
+
+        <div style="
+        margin-top: 42px;
+        margin-left: 120px;
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+      ">
+            <div>
+                <p style="
+            font-family: DM Sans 36pt;
+            font-size: 60px;
+            font-style: normal;
+            font-weight: 700;
+            color: #7f28ff;
+          ">
+                    GroWonder<span style="color: black"> Resource Center</span>
+                </p>
+                <p style="
+            font-family: DM Sans 18pt;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            color: rgba(112, 112, 112, 0.8);
+          ">
+                    Your go-to for family-oriented and interactive resources to
+                    nurture
+                    your child
+                </p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 22px">
+                <div
+                    style="position: relative; display: flex; align-items: center">
+                    <input type="text" placeholder="Search" style="
+              width: 100%;
+              border-radius: 20px;
+              border: 1.5px solid rgba(112, 112, 112, 0.8);
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              padding: 10px 20px;
+              height: 40px;
+              font-size: 16px;
+              font-weight: 400;
+            " />
+                </div>
+                <div class="filter-container"
+                    style="display: flex; flex-wrap: wrap; gap: 10px">
+                    <div class="filterbox active">
+                        <p>All Items</p>
+                    </div>
+                    <div class="filterbox">
+                        <p>Activities</p>
+                    </div>
+                    <div class="filterbox">
+                        <p>Blogs</p>
+                    </div>
+                    <div class="filterbox">
+                        <p>ADHD</p>
+                    </div>
+                    <div class="filterbox">
+                        <p>Autism</p>
+                    </div>
+                    <div class="filterbox">
+                        <p>ODD</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="display: flex; flex-direction: row; gap: 150px; margin-top: 75px">
+                <div
+                    style="display: flex; flex-direction: column; width: 250px">
+                    <p
+                        style="font-size: 30px; font-style: normal; font-weight: 400">
+                        Filter by:
+                    </p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked="checked" />
+                            <span class="checkbox-label">Most Recent</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" />
+                            <span class="checkbox-label">Topic</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" />
+                            <span class="checkbox-label">Top Viewed</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" />
+                            <span class="checkbox-label">Diagnosis</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" />
+                            <span class="checkbox-label">Favorites</span>
+                        </label>
+                    </div>
+                </div>
+                <div
+                    style="display: flex; flex-wrap: wrap; gap: 25px; width: 100%">
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+                    <div style="
+              border-radius: 20px;
+              border: 1.5px solid
+                var(--Very-light-Grey, rgba(217, 217, 217, 0.85));
+              background: var(--White, #fff);
+
+              box-shadow: -11px 12px 11.6px 5px rgba(0, 0, 0, 0.05);
+              width: 31%;
+              height: 233px;
+              flex-shrink: 0;
+            "></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        document.querySelectorAll(".filterbox").forEach((box) => {
+            box.addEventListener("click", function () {
+                document.querySelectorAll(".filterbox").forEach((item) => {
+                    item.classList.remove("active");
+                });
+                this.classList.add("active");
+            });
+        });
+    </script>
+    </body>
+
+</html>
