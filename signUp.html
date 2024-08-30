@@ -230,9 +230,8 @@
       document
         .getElementById("createAccount")
         .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent the default form submission
+          event.preventDefault();
 
-          // Collect form data
           const formData = {
             first_name: document.getElementById("first_name").value,
             last_name: document.getElementById("last_name").value,
@@ -273,11 +272,9 @@
         const passwordError = document.getElementById("password-error");
         const rePasswordError = document.getElementById("re-password-error");
 
-        // Password validation regex
         const passwordRegex =
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        // Function to validate password format
         function validatePassword() {
           const password = passwordInput.value;
           if (!passwordRegex.test(password)) {
@@ -291,7 +288,6 @@
           }
         }
 
-        // Function to validate password match
         function validatePasswordMatch() {
           const password = passwordInput.value;
           const rePassword = rePasswordInput.value;
@@ -306,20 +302,18 @@
           }
         }
 
-        // Add event listeners to validate on input change
         passwordInput.addEventListener("input", function () {
           validatePassword();
-          validatePasswordMatch(); // Also check match when password changes
+          validatePasswordMatch(); 
         });
 
         rePasswordInput.addEventListener("input", validatePasswordMatch);
 
-        // Validate on form submit
         document
           .getElementById("createAccount")
           .addEventListener("submit", function (event) {
             if (!validatePassword() || !validatePasswordMatch()) {
-              event.preventDefault(); // Prevent form submission if validation fails
+              event.preventDefault(); 
             }
           });
       });
