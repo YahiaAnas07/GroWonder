@@ -4,49 +4,95 @@
 }
 
 .header {
-    margin-left: 2.5rem; /* Adjust margin using rem */
-    margin-bottom: 3.3rem; /* Adjust margin using rem */
+    margin-left: 2.5rem;
+    /* Adjust margin using rem */
+    margin-bottom: 3.3rem;
+    /* Adjust margin using rem */
 }
 
 .input-default {
-    width: 25vw; /* Use percentage for responsiveness */
-    max-width: 28rem; /* Limit maximum width */
+    width: 26vw;
+    /* Use percentage for responsiveness */
+    max-width: 29rem;
+    /* Limit maximum width */
     margin-bottom: 0;
 }
 
 .input-container {
     position: relative;
+    width: '100%';
 }
 
 .input-container input {
-    padding: 1rem; /* Use rem for padding */
-    margin-bottom: 0.625rem; /* Use rem */
-    border-radius: 0.625rem; /* Use rem */
+    padding: 1rem;
+    /* Use rem for padding */
+    margin-bottom: 0.625rem;
+    /* Use rem */
+    border-radius: 0.625rem;
+    /* Use rem */
     border: 1.5px solid var(--Very-light-Grey);
     background: var(--White);
-    font-size: 1.125rem; /* Use rem for font size */
+    font-size: 1.125rem;
+    /* Use rem for font size */
     outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-container select {
+    padding: 1rem;
+    /* Use rem for padding */
+    margin-bottom: 0.625rem;
+    /* Use rem */
+    border-radius: 0.625rem;
+    /* Use rem */
+    border: 1.5px solid var(--Very-light-Grey);
+    background: var(--White);
+    font-size: 1.125rem;
+    /* Use rem for font size */
+    outline: none;
+    appearance: none;
     transition: border-color 0.3s;
 }
 
 .input-container label {
     position: absolute;
-    top: 1.25rem; /* Adjust using rem */
-    left: 1rem; /* Adjust using rem */
-    font-size: 0.875rem; /* Use rem for font size */
+    top: 1.25rem;
+    /* Adjust using rem */
+    left: 1rem;
+    /* Adjust using rem */
+    font-size: 0.875rem;
+    /* Use rem for font size */
     color: #999;
     transition: all 0.2s;
     pointer-events: none;
 }
 
-.input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label {
-    top: -0.625rem; /* Adjust using rem */
-    left: 0.625rem; /* Adjust using rem */
-    font-size: 0.75rem; /* Use rem for font size */
+.input-container input:focus+label,
+.input-container input:not(:placeholder-shown)+label {
+    top: -0.625rem;
+    /* Adjust using rem */
+    left: 0.625rem;
+    /* Adjust using rem */
+    font-size: 0.75rem;
+    /* Use rem for font size */
     color: #7F28FF;
     background-color: #fff;
-    padding: 0 0.3125rem; /* Use rem */
+    padding: 0 0.3125rem;
+    /* Use rem */
+}
+.error-message {
+    color: red;
+    font-size: 0.875rem; /* Smaller font size */
+    display: none; /* Hidden by default */
+    margin-top: 0.25rem; /* Some spacing */
+  }
+.input-container select:focus + label{ 
+    top: -0.625rem; /* Moves label above the select field */
+    left: 0.625rem; /* Adjust as needed */
+    font-size: 0.75rem; /* Smaller font size */
+    color: #7F28FF; /* Highlight color */
+    background-color: #fff; /* Background color to prevent overlap */
+    padding: 0 0.3125rem; /* Adds some space */
 }
 
 .input-default:focus {
@@ -54,42 +100,58 @@
 }
 
 /* Media Queries */
-@media (max-width: 1024px) { /* Small laptops */
+@media (max-width: 1024px) {
+
+    /* Small laptops */
     .header {
-        margin-left: 2rem; /* Slightly reduce margin */
-        margin-bottom: 2.5rem; /* Adjust margin */
+        margin-left: 2rem;
+        /* Slightly reduce margin */
+        margin-bottom: 2.5rem;
+        /* Adjust margin */
     }
 
     .input-default {
-        width: 85%; /* Adjust width for smaller screens */
+        width: 85%;
+        /* Adjust width for smaller screens */
     }
 
     .input-container input {
-        font-size: 1rem; /* Adjust font size */
+        font-size: 1rem;
+        /* Adjust font size */
     }
 
     .input-container label {
-        font-size: 0.75rem; /* Smaller label font */
+        font-size: 0.75rem;
+        /* Smaller label font */
     }
 }
 
-@media (max-width: 600px) { /* Mobile devices */
+@media (max-width: 600px) {
+
+    /* Mobile devices */
     .header {
-        margin-left: 1rem; /* Further reduce margin */
-        margin-bottom: 2rem; /* Adjust margin */
+        margin-left: 1rem;
+        /* Further reduce margin */
+        margin-bottom: 2rem;
+        /* Adjust margin */
     }
 
     .input-default {
-        width: 90%; /* Full width on mobile */
+        width: 90%;
+        /* Full width on mobile */
     }
 
     .input-container input {
-        padding: 0.75rem; /* Adjust padding */
-        font-size: 0.875rem; /* Smaller font size */
+        padding: 0.75rem;
+        /* Adjust padding */
+        font-size: 0.875rem;
+        /* Smaller font size */
     }
 
     .input-container label {
-        font-size: 0.625rem; /* Smaller label font */
-        top: 1rem; /* Adjust label position */
+        font-size: 0.625rem;
+        /* Smaller label font */
+        top: 1rem;
+        /* Adjust label position */
     }
 }
