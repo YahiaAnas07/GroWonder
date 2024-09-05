@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="./adminPortalStyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select all menu links
+        const menuLinks = document.querySelectorAll(".menu-link");
+
+        // Loop through each menu link
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default anchor click behavior
+
+            // Get target content section from data attribute
+            const targetId = this.getAttribute("data-target");
+
+            // Hide all content sections
+            const contentSections =
+              document.querySelectorAll(".content-section");
+            contentSections.forEach((section) =>
+              section.classList.remove("active")
+            );
+
+            // Show the selected content section
+            const targetSection = document.getElementById(targetId);
+            targetSection.classList.add("active");
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="logo-section">
+          <button class="menu-toggle">&#9776;</button>
+          <img src="./assets/Vector.png" alt="Logo" style="width: 22vh;" />
+        </div>
+        <ul class="menu">
+          <li>
+            <a href="#" class="menu-link" data-target="resources">Resources</a>
+          </li>
+          <li><a href="#" class="menu-link" data-target="faqs">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Resources Content -->
+        <div id="resources" class="content-section active">
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+        </div>
+
+        <!-- FAQs Content -->
+        <div id="faqs" class="content-section">
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
