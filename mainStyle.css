@@ -22,7 +22,6 @@ a {
 .hero-container {
     background-color: #fff;
     display: flex;
-    height: 100vh;
     /* Use viewport height for full screen height */
     width: 100%;
     flex-direction: column;
@@ -142,10 +141,10 @@ a {
 }
 
 .section-container {
-    height: 100vh;
     /* Use viewport height for full screen height */
     position: relative;
     margin-top: 100px;
+    padding-bottom: 3.75rem;
 }
 
 
@@ -158,15 +157,15 @@ a {
     border-radius: 1.25rem;
     max-width: 60vw;
     /* Use viewport width for responsive width */
-    margin: 3.75rem auto;
+    margin: auto;
     gap: 1rem;
-    height: 80vh;
+    padding-bottom: 3.75rem;
     /* Use viewport height for responsive height */
 }
 
 
 .story-container p {
-    max-width: 37vw;
+    max-width: 35vw;
     /* Use viewport width for responsive width */
 }
 
@@ -185,7 +184,6 @@ a {
     font-style: normal;
     font-weight: 900;
     line-height: 5.75rem;
-    height: 12.1875rem;
     margin: 0px;
 }
 
@@ -195,7 +193,6 @@ a {
     /* Use rem for scalable font size */
     font-weight: 400;
     color: #fff;
-    max-width: 60vw;
     /* Use viewport width for responsive width */
 }
 
@@ -209,7 +206,7 @@ a {
 }
 
 .story-image {
-    width: 25vw;
+    width: 23vw;
     /* Use viewport width for responsive width */
     height: auto;
     border-radius: 4.25rem;
@@ -231,7 +228,6 @@ a {
 
 /* Main Container */
 .main-container {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -670,7 +666,6 @@ a {
         margin-left: 2rem;
         /* Reduce margin for smaller screens */
     }
-
     .hero-title,
     .section-title {
         font-size: 2.5rem;
