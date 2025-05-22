@@ -1,6 +1,9 @@
 body {
     font-family: "DM Sans", sans-serif;
-    width: 100%;
+    min-height: 100vh;
+    max-height: fit-content;
+    /* Use viewport height (100% of the visible area) */
+    min-width: 1400px;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -123,7 +126,7 @@ a {
 }
 
 .cta-button {
-    width: 40vw;
+    width: 40%;
     /* Use viewport width for responsive width */
     border-radius: 1.125rem;
     /* Use rem for scalable radius */
@@ -135,7 +138,7 @@ a {
 
 .cta-link {
     color: #7f28ff;
-    width: 30vw;
+    width: 40%;
     /* Use viewport width for responsive width */
     margin: auto 0;
 }
@@ -155,7 +158,7 @@ a {
     padding-left: 3.375rem;
     padding-top: 4rem;
     border-radius: 1.25rem;
-    max-width: 60vw;
+    width: 70%;
     /* Use viewport width for responsive width */
     margin: auto;
     gap: 1rem;
@@ -165,8 +168,8 @@ a {
 
 
 .story-container p {
-    max-width: 35vw;
-    /* Use viewport width for responsive width */
+    width: 60%
+        /* Use viewport width for responsive width */
 }
 
 .story-title {
@@ -194,6 +197,11 @@ a {
     font-weight: 400;
     color: #fff;
     /* Use viewport width for responsive width */
+}
+
+.story-author-box {
+    width: 60%;
+    align-self: flex-end;
 }
 
 
@@ -268,6 +276,7 @@ a {
     padding: 0 5vw;
     padding-top: 5vw;
     padding-bottom: 5vw;
+    justify-content: space-between;
 }
 
 
@@ -356,6 +365,7 @@ a {
     cursor: pointer;
     border: none;
     border-radius: 1.25rem;
+    align-self: center;
     /* 20px */
 }
 
@@ -385,12 +395,14 @@ a {
     gap: 2rem;
     position: relative;
     margin-top: 7vw;
+    width: 40%;
 }
 
 .reviews-title {
     font-size: 3.125rem;
     /* 50px */
     font-weight: 500;
+    align-self: center;
 }
 
 .reviews-subtitle {
@@ -418,12 +430,13 @@ a {
 }
 
 .input-default {
-    width: 25vw;
+    width: 94%;
     margin-bottom: 0;
 }
 
 .input-container {
     position: relative;
+    width: 70%;
 }
 
 .input-container input,
@@ -593,7 +606,7 @@ a {
     /* 20px */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 5vw 4vw;
     border: 1px solid rgba(112, 112, 112, 0.8);
 }
@@ -666,6 +679,7 @@ a {
         margin-left: 2rem;
         /* Reduce margin for smaller screens */
     }
+
     .hero-title,
     .section-title {
         font-size: 2.5rem;
@@ -704,15 +718,10 @@ a {
 
     .rectangle-1,
     .rectangle-2 {
-        width: 100%;
+        width: 45%;
         /* Full width on smaller screens */
         max-width: none;
         /* Remove max-width */
-    }
-
-    .rectangle-2 {
-        margin-top: 2rem;
-        /* Space between rectangles */
     }
 
     .main-button,
@@ -783,16 +792,19 @@ a {
 
 /* Styles for mobile devices */
 @media (max-width: 600px) {
-    body{
-        flex:1;
+    body {
+        flex: 1;
     }
+
     .header {
-        flex-direction: column;
-        /* Stack header items */
         align-items: center;
         /* Center align */
-        margin-left: 0;
-        /* Remove left margin */
+        margin-top: 0;
+    }
+
+    .logo {
+        width: 50vw;
+        /* Adjust logo size */
     }
 
     .hero-title {
@@ -810,7 +822,6 @@ a {
     }
 
     .cta-container {
-        flex-direction: column;
         /* Stack buttons */
         width: 90%;
         /* Adjust width */
@@ -882,7 +893,7 @@ a {
     .big-questions {
         font-size: 2rem;
         /* 32px */
-        padding: 3vw 2vw;
+        padding: 3vw 10vw;
     }
 
     .question-item {
@@ -902,7 +913,7 @@ a {
     }
 
     .content-container {
-        padding: 4vw 2vw;
+        padding: 4vw 10vw;
         /* Adjust padding */
     }
 
@@ -914,5 +925,9 @@ a {
     .footer-image {
         width: 70vw;
         /* Adjust footer image size */
+    }
+
+    .story-image {
+        min-width: 300px;
     }
 }

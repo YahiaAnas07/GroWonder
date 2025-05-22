@@ -4,7 +4,7 @@
 <head>
   <link rel="icon" href="./assets/Logo.png" type="image/png" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=0" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="mainStyle.css">
@@ -144,10 +144,6 @@
     .star.selected~.star {
       color: #FF7415;
     }
-
-    .input-container select {
-      width: 23vw;
-    }
   </style>
 </head>
 
@@ -159,7 +155,7 @@
         <a href="javascript:void(0);" onclick="scrollToSection('whoWeAre')" class="nav-link">Who We are</a>
         <a href="javascript:void(0);" onclick="scrollToSection('solutions')" class="nav-link">Our Solutions</a>
         <a href="javascript:void(0);" class="nav-link" href="javascript:void(0);" onclick="scrollToSection('faqs')">FAQS</a>
-        <a href="./resources.html" class="nav-link">Resources</a>
+        <!-- <a href="./resources.html" class="nav-link">Resources</a> -->
         <a href="./signUp.html" class="signup-button">Sign Up</a>
         <img loading="lazy" src="assets/Ellipse5.png" class="profile-image" alt="User profile" />
       </div>
@@ -172,6 +168,8 @@
         ">
       <img loading="lazy" src="assets/Characters-07.png" style="position: absolute; height: 20vw; left: 30px" />
       <img loading="lazy" src="assets/Logo.png" class="hero-icon" alt />
+      <img loading="lazy" src="assets/Character2.png" style="position: absolute; width: 16vw; right: 30px; bottom: 0" />
+
 
       <p class="hero-title">
         Empower Your Child's Journey <br />
@@ -185,7 +183,6 @@
       <a href="javascript:void(0);" onclick="scrollToSection('whoWeAre')" class="cta-button">Learn more</a>
       <a href="#" class="cta-link">Download App</a>
     </div>
-    <img loading="lazy" src="assets/Character2.png" style="position: absolute; width: 16vw; right: 30px; bottom: 0" />
   </header>
   <section class="section-container" id="whoWeAre">
     <div class="story-container">
@@ -217,7 +214,7 @@
         Join us now and Let's build GroWonder together, one step at
         a time.
       </p>
-      <div style="width: 35vw; align-self: flex-end;">
+      <div class="story-author-box">
         <p class="story-author">
           <span style="font-size: 16px; font-weight: 900">Shahenda
             Abo El Hamd</span><br />Mother of Ezzeldin
@@ -414,7 +411,8 @@
         <form style="display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 39px;">
+        gap: 39px;
+        width: 100%;">
           <div class="star-rating">
             <span class="star" data-value="5">&#9733;</span>
             <span class="star" data-value="4">&#9733;</span>
@@ -428,7 +426,7 @@
             <label for="username">Username</label>
           </div>
           <div class="input-container">
-            <select id="diagnosis" class="input-default" style="width: 27vw;">
+            <select id="diagnosis" class="input-default" style="width: 100%;">
               <option value=" " hidden selected></option>
               <option value="ASD">ASD - Autism Spectrum</option>
               <option value="Hyperactivity">Hyperactivity</option>
@@ -461,8 +459,8 @@
       </div>
     </div>
 
-    <img src="assets/drawings.png" style="width: 30vw;position: absolute;right: 5vw;top:21vw; z-index: 1;" />
-    <img src="assets/drawings.png" style="width: 30vw;position: absolute;left: 5vw;top:20vw; z-index: 1;" />
+    <img src="assets/drawings.png" style="width: 30vw;min-width: 350px;position: absolute;right: 5vw;top:21vw; z-index: 1;" />
+    <img src="assets/drawings.png" style="width: 30vw;min-width: 350px;position: absolute;left: 5vw;top:20vw; z-index: 1;" />
   </section>
   <section class="big-questions" id="faqs">
     <div class="questions-container">
