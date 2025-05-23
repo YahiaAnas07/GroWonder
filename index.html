@@ -1,695 +1,1084 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link rel="icon" href="./assets/Logo.png" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="mainStyle.css" />
+    <title>GroWonder</title>
 
-<head>
-  <link rel="icon" href="./assets/Logo.png" type="image/png" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=0" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="mainStyle.css">
-  <title>GroWonder</title>
+    <style>
+      .popup-form {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(3px);
+      }
 
-  <style>
-    .popup-form {
-      display: none;
-      position: fixed;
-      z-index: 3;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(3px);
-    }
+      /* Popup content */
+      .popup-content {
+        background-color: #fff;
+        margin: 7% auto;
+        padding: 72px 110px 24px 110px;
+        width: 880px;
+        height: 590px;
+        border-radius: 40px;
+        position: relative;
+      }
 
-    /* Popup content */
-    .popup-content {
-      background-color: #fff;
-      margin: 7% auto;
-      padding: 72px 110px 24px 110px;
-      width: 880px;
-      height: 590px;
-      border-radius: 40px;
-      position: relative;
-    }
+      /* Close button */
+      .close {
+        color: #aaa;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 28px;
+        font-weight: bold;
+      }
 
-    /* Close button */
-    .close {
-      color: #aaa;
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      font-size: 28px;
-      font-weight: bold;
-    }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
+      .popup-input {
+        width: 21vw;
+      }
 
-    .popup-input {
-      width: 21vw;
-    }
+      .input-container select {
+        margin-bottom: 0;
+        width: 100%;
+      }
 
-    .input-container select {
-      margin-bottom: 0;
-      width: 100%;
-    }
+      .popup-content textarea {
+        padding: 16px;
+        height: 100px;
+        border-radius: 10px;
+        border: 1.5px solid rgba(217, 217, 217, 0.85);
+        background: #fff;
+        outline: none;
+        transition: border-color 0.3s;
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+      }
 
-    .popup-content textarea {
-      padding: 16px;
-      height: 100px;
-      border-radius: 10px;
-      border: 1.5px solid rgba(217, 217, 217, 0.85);
-      background: #FFF;
-      outline: none;
-      transition: border-color 0.3s;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-    }
+      .input-container input {
+        margin-bottom: 0;
+      }
 
-    .input-container input {
-      margin-bottom: 0;
-    }
+      .btn-tertiary {
+        color: black;
+        margin: auto;
+        box-shadow: 0px 1px 4px 0px rgba(30, 41, 59, 0.3);
+        display: flex;
+        width: 320px;
+        padding: 7px 13px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: 6px;
+        margin-top: 10px;
+        height: 30px;
+      }
 
-    .btn-tertiary {
-      color: black;
-      margin: auto;
-      box-shadow: 0px 1px 4px 0px rgba(30, 41, 59, 0.30);
-      display: flex;
-      width: 320px;
-      padding: 7px 13px;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      border-radius: 6px;
-      margin-top: 10px;
-      height: 30px;
-    }
+      /* input file style */
+      .input-file1,
+      .input-file {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
 
-    /* input file style */
-    .input-file1,
-    .input-file {
-      width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-    }
+      .input-file1 + .js-labelFile1,
+      .input-file + .js-labelFile {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        justify-content: center;
+        cursor: pointer;
+      }
 
-    .input-file1+.js-labelFile1,
-    .input-file+.js-labelFile {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      text-align: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+      .icon-plus {
+        font-size: 13.5px;
+        color: #ff7415;
+        content: "\f00c";
+      }
 
-    .icon-plus {
-      font-size: 13.5px;
-      color: #ff7415;
-      content: "\f00c";
-    }
+      .input-file1 + .js-labelFile1.has-file .icon-plus:before,
+      .input-file + .js-labelFile.has-file .icon-plus:before {
+        content: "\f00c";
+      }
 
-    .input-file1+.js-labelFile1.has-file .icon-plus:before,
-    .input-file+.js-labelFile.has-file .icon-plus:before {
-      content: "\f00c";
-    }
+      .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 2em;
+        justify-content: center;
+      }
 
-    .star-rating {
-      display: flex;
-      flex-direction: row-reverse;
-      font-size: 2em;
-      justify-content: center;
-    }
+      .star {
+        cursor: pointer;
+        color: lightgray;
+        transition: color 0.2s;
+      }
 
-    .star {
-      cursor: pointer;
-      color: lightgray;
-      transition: color 0.2s;
-    }
+      .star:hover,
+      .star:hover ~ .star,
+      .star.selected,
+      .star.selected ~ .star {
+        color: #ff7415;
+      }
+    </style>
+  </head>
 
-    .star:hover,
-    .star:hover~.star,
-    .star.selected,
-    .star.selected~.star {
-      color: #FF7415;
-    }
-  </style>
-</head>
-
-<body>
-  <header class="hero-container">
-    <nav class="header">
-      <img loading="lazy" src="assets/Vector.png" class="logo" alt="GroWonder logo" />
-      <div class="nav-container">
-        <a href="javascript:void(0);" onclick="scrollToSection('whoWeAre')" class="nav-link">Who We are</a>
-        <a href="javascript:void(0);" onclick="scrollToSection('solutions')" class="nav-link">Our Solutions</a>
-        <a href="javascript:void(0);" class="nav-link" href="javascript:void(0);" onclick="scrollToSection('faqs')">FAQS</a>
-        <!-- <a href="./resources.html" class="nav-link">Resources</a> -->
-        <a href="./signUp.html" class="signup-button">Sign Up</a>
-        <img loading="lazy" src="assets/Ellipse5.png" class="profile-image" alt="User profile" />
-      </div>
-    </nav>
-    <div style="
+  <body>
+    <header class="hero-container">
+      <nav class="header">
+        <img
+          loading="lazy"
+          src="assets/Vector.png"
+          class="logo"
+          alt="GroWonder logo"
+        />
+        <div class="nav-container">
+          <a
+            href="javascript:void(0);"
+            onclick="scrollToSection('whoWeAre')"
+            class="nav-link"
+            >Who We are</a
+          >
+          <a
+            href="javascript:void(0);"
+            onclick="scrollToSection('solutions')"
+            class="nav-link"
+            >Our Solutions</a
+          >
+          <a
+            href="javascript:void(0);"
+            class="nav-link"
+            href="javascript:void(0);"
+            onclick="scrollToSection('faqs')"
+            >FAQS</a
+          >
+          <!-- <a href="./resources.html" class="nav-link">Resources</a> -->
+          <a href="./signUp.html" class="signup-button">Sign Up</a>
+          <img
+            loading="lazy"
+            src="assets/Ellipse5.png"
+            class="profile-image"
+            alt="User profile"
+          />
+        </div>
+      </nav>
+      <div
+        style="
           display: flex;
           flex-direction: column;
           margin-top: 30px;
           align-items: center;
-        ">
-      <img loading="lazy" src="assets/Characters-07.png" style="position: absolute; height: 20vw; left: 30px" />
-      <img loading="lazy" src="assets/Logo.png" class="hero-icon" alt />
-      <img loading="lazy" src="assets/Character2.png" style="position: absolute; width: 16vw; right: 30px; bottom: 0" />
+        "
+      >
+        <img
+          loading="lazy"
+          src="assets/Characters-07.png"
+          style="position: absolute; height: 20vw; left: 30px"
+        />
+        <img loading="lazy" src="assets/Logo.png" class="hero-icon" alt />
+        <img
+          loading="lazy"
+          src="assets/Character2.png"
+          style="position: absolute; width: 16vw; right: 30px; bottom: 0"
+        />
 
-
-      <p class="hero-title">
-        Empower Your Child's Journey <br />
-        Join <span style="color: #7f28ff">GroWonder</span>
-      </p>
-      <p class="hero-description">
-        GroWonder connects parents and experts nurturing the potential of children with developmental disorders
-      </p>
-    </div>
-    <div class="cta-container">
-      <a href="javascript:void(0);" onclick="scrollToSection('whoWeAre')" class="cta-button">Learn more</a>
-      <a href="#" class="cta-link">Download App</a>
-    </div>
-  </header>
-  <section class="section-container" id="whoWeAre">
-    <div class="story-container">
-      <p class="story-title">Our Story</p>
-      <p class="story-subtitle">
-        A Hero named
-        <span class="story-subtitle" style="color: #7f28ff">Ezz
-          El-Din</span>
-      </p>
-      <p class="story-text">
-        Ezzeldin's world was a whirlwind of sounds and colors.
-        Doctors spoke a
-        different language, and appointments felt impossible. We
-        were all
-        alone. Then, one evening, watching him build amazing block
-        structures,
-        a world bloomed in my mind: GroWonder.
-        <br /><br />
-        Inspired by Ezzeldin's strength, I envisioned a place where
-        parents
-        could help each other, doctors could work together
-        seamlessly, and
-        therapists could personalize their approach for each child.
-        A world
-        that celebrated every child's unique magic, a world where
-        Ezzeldin
-        could not just survive, but truly thrive.
-        <br /><br />
-        Join us now and Let's build GroWonder together, one step at
-        a time.
-      </p>
-      <div class="story-author-box">
-        <p class="story-author">
-          <span style="font-size: 16px; font-weight: 900">Shahenda
-            Abo El Hamd</span><br />Mother of Ezzeldin
-          & Co-Founder of GroWonder
+        <p class="hero-title">
+          Empower Your Child's Journey <br />
+          Join <span style="color: #7f28ff">GroWonder</span>
+        </p>
+        <p class="hero-description">
+          GroWonder connects parents and experts nurturing the potential of
+          children with developmental disorders
         </p>
       </div>
-      <div style="position: absolute; right: 225px">
-        <img src="assets/Shahenda.png" alt="Shahenda and children" class="story-image" />
+      <div class="cta-container">
+        <a
+          href="javascript:void(0);"
+          onclick="scrollToSection('whoWeAre')"
+          class="cta-button"
+          >Learn more</a
+        >
+        <a href="#" class="cta-link">Download App</a>
       </div>
-      <img loading="lazy" src="assets/Character4.png" style="position: absolute; width: 15vw; right: 33%; top: 8%" />
-      <img loading="lazy" src="assets/Character3.png"
-        style="position: absolute; width: 12vw; right: 30px; bottom: 150px" />
-    </div>
-    <img loading="lazy" src="assets/Ellipse7.png" style="position: absolute; width: 10vw;bottom:0;left: 0;" />
-  </section>
-  <section class="main-container">
-    <div id="solutions" style="width:85%;gap: 20px;display: flex;flex-direction: column;padding-bottom: 15vh;">
-      <div class="our-solutions">Our Solutions</div>
-      <div style="display: flex;flex-direction: row;justify-content: space-between;">
-        <div class="rectangle-1">
-
-          <p class="rectangle-1-title">For Families</p>
-          <p class="rectangle-1-subtitle">Comprehensive
-            Support for Children on the
-            Spectrum</p>
-
-          <p class="rectangle-1-text">Does raising a child with
-            Developmental Delays (DDD) feel like
-            navigating a maze alone? You're not. GroWonder is your
-            online safe
-            haven, connecting you with a supportive network of
-            parents and
-            caregivers who understand your journey. Share
-            experiences, learn
-            from others, and keep a centralized record of your
-            child's
-            developmental progress. At GroWonder, you'll find the
-            empowerment
-            and resources to help your child blossom.</p>
-          <div style="display: flex;flex-direction: column; margin-left: 60px;margin-bottom: 32px;">
-            <p class="what-to-expect">What to expect?</p>
-            <div style="gap: 3vh;display: flex;flex-direction: column;">
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode1.png" class="isolation-mode"></img>
-                <p class="tips">Empowering your
-                  child to succeed</p>
-              </div>
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode1.png" class="isolation-mode"></img>
-                <p class="tips">All-in-One Support</p>
-              </div>
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode1.png" class="isolation-mode"></img>
-                <p class="tips">Top-Notch Care</p>
-              </div>
-            </div>
-          </div>
-          <button class="main-button2">
-            <p class="download-app">Download app</p>
-
-          </button>
+    </header>
+    <section class="section-container" id="whoWeAre">
+      <div class="story-container">
+        <p class="story-title">Our Story</p>
+        <p class="story-subtitle">
+          A Hero named
+          <span class="story-subtitle" style="color: #7f28ff">Ezz El-Din</span>
+        </p>
+        <p class="story-text">
+          Ezzeldin's world was a whirlwind of sounds and colors. Doctors spoke a
+          different language, and appointments felt impossible. We were all
+          alone. Then, one evening, watching him build amazing block structures,
+          a world bloomed in my mind: GroWonder.
+          <br /><br />
+          Inspired by Ezzeldin's strength, I envisioned a place where parents
+          could help each other, doctors could work together seamlessly, and
+          therapists could personalize their approach for each child. A world
+          that celebrated every child's unique magic, a world where Ezzeldin
+          could not just survive, but truly thrive.
+          <br /><br />
+          Join us now and Let's build GroWonder together, one step at a time.
+        </p>
+        <div class="story-author-box">
+          <p class="story-author">
+            <span style="font-size: 16px; font-weight: 900"
+              >Shahenda Abo El Hamd</span
+            ><br />Mother of Ezzeldin & Co-Founder of GroWonder
+          </p>
         </div>
-        <div class="rectangle-2">
+        <div style="position: absolute; right: 225px">
+          <img
+            src="assets/Shahenda.png"
+            alt="Shahenda and children"
+            class="story-image"
+          />
+        </div>
+        <img
+          loading="lazy"
+          src="assets/Character4.png"
+          style="position: absolute; width: 15vw; right: 33%; top: 8%"
+        />
+        <img
+          loading="lazy"
+          src="assets/Character3.png"
+          style="position: absolute; width: 12vw; right: 30px; bottom: 150px"
+        />
+      </div>
+      <img
+        loading="lazy"
+        src="assets/Ellipse7.png"
+        style="position: absolute; width: 10vw; bottom: 0; left: 0"
+      />
+    </section>
+    <section class="main-container">
+      <div
+        id="solutions"
+        style="
+          width: 85%;
+          gap: 20px;
+          display: flex;
+          flex-direction: column;
+          padding-bottom: 15vh;
+        "
+      >
+        <div class="our-solutions">Our Solutions</div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          "
+        >
+          <div class="rectangle-1">
+            <p class="rectangle-1-title">For Families</p>
+            <p class="rectangle-1-subtitle">
+              Comprehensive Support for Children on the Spectrum
+            </p>
 
-          <p class="rectangle-2-title">For
-            Businesses</p>
-          <p class="rectangle-2-subtitle">Empowering
-            Specialists and Connecting with
-            Families</p>
-
-          <p class="rectangle-2-text">Caregivers,
-            doctors, and nurseries can also join our platform
-            to
-            expand their reach and connect with families seeking
-            exceptional
-            care for children with Developmental Delays (DDD).
-            GrowWonder acts
-            as a powerful bridge, allowing you to showcase your
-            services
-            directly to the target audience who needs them most.
-            Plus, say
-            goodbye to piles of paperwork! Our platform simplifies
-            record-keeping, giving you a centralized location to
-            track your
-            patients' progress efficiently.</p>
-
-
-          <div style="display: flex;flex-direction: column; margin-left: 60px;margin-bottom: 32px;">
-            <p class="what-to-expect">What to expect?</p>
-            <div style="gap: 3vh;display: flex;flex-direction: column;">
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode2.png" class="isolation-mode"></img>
-                <p class="tips">Seamless
-                  client tracking</p>
-              </div>
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode2.png" class="isolation-mode"></img>
-                <p class="tips">Easy session
-                  booking</p>
-              </div>
-              <div style="display: flex;flex-direction: row;gap: 12px;">
-                <img src="assets/Isolation_Mode2.png" class="isolation-mode"></img>
-                <p class="tips">Schedule management</p>
+            <p class="rectangle-1-text">
+              Does raising a child with Developmental Delays (DDD) feel like
+              navigating a maze alone? You're not. GroWonder is your online safe
+              haven, connecting you with a supportive network of parents and
+              caregivers who understand your journey. Share experiences, learn
+              from others, and keep a centralized record of your child's
+              developmental progress. At GroWonder, you'll find the empowerment
+              and resources to help your child blossom.
+            </p>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-left: 60px;
+                margin-bottom: 32px;
+              "
+            >
+              <p class="what-to-expect">What to expect?</p>
+              <div style="gap: 3vh; display: flex; flex-direction: column">
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode1.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">Empowering your child to succeed</p>
+                </div>
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode1.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">All-in-One Support</p>
+                </div>
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode1.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">Top-Notch Care</p>
+                </div>
               </div>
             </div>
+            <button class="main-button2">
+              <p class="download-app">Download app</p>
+            </button>
           </div>
-          <button id="openFormBtn" class="main-button">
-            <p class="contact-us">Contact Us</p>
-          </button>
-          <div id="popupForm" class="popup-form">
-            <div class="popup-content">
-              <div style="gap: 8px;text-align: center;">
-                <span class="close" id="closeFormBtn">&times;</span>
-                <p style="font-size: 50px;
-                font-style: normal;
-                font-weight: 500;">Join us in our Journey!</p>
-                <p style="font-size: 20px;
-                font-style: normal;
-                font-weight: 400;color: rgba(112, 112, 112, 0.80);">Leave your Details and we will contact you!</p>
+          <div class="rectangle-2">
+            <p class="rectangle-2-title">For Businesses</p>
+            <p class="rectangle-2-subtitle">
+              Empowering Specialists and Connecting with Families
+            </p>
+
+            <p class="rectangle-2-text">
+              Caregivers, doctors, and nurseries can also join our platform to
+              expand their reach and connect with families seeking exceptional
+              care for children with Developmental Delays (DDD). GrowWonder acts
+              as a powerful bridge, allowing you to showcase your services
+              directly to the target audience who needs them most. Plus, say
+              goodbye to piles of paperwork! Our platform simplifies
+              record-keeping, giving you a centralized location to track your
+              patients' progress efficiently.
+            </p>
+
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-left: 60px;
+                margin-bottom: 32px;
+              "
+            >
+              <p class="what-to-expect">What to expect?</p>
+              <div style="gap: 3vh; display: flex; flex-direction: column">
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode2.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">Seamless client tracking</p>
+                </div>
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode2.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">Easy session booking</p>
+                </div>
+                <div style="display: flex; flex-direction: row; gap: 12px">
+                  <img
+                    src="assets/Isolation_Mode2.png"
+                    class="isolation-mode"
+                  />
+                  <p class="tips">Schedule management</p>
+                </div>
               </div>
-              <div style="margin-top: 30px;">
-                <form action="#" style="display: flex; flex-direction: column;gap: 20px;align-items: center;">
-                  <div style="display: flex; flex-direction: row;gap: 16px;width:100%;justify-content: space-between;">
-                    <div style="display: flex; flex-direction: column;gap: 20px;width: 48%;">
-                      <div class="input-container">
-                        <input type="text" id="BusinessName" placeholder=" " class="input-default">
-                        <label for="BusinessName">Business Name</label>
+            </div>
+            <button id="openFormBtn" class="main-button">
+              <p class="contact-us">Contact Us</p>
+            </button>
+            <div id="popupForm" class="popup-form">
+              <div class="popup-content">
+                <div style="gap: 8px; text-align: center">
+                  <span class="close" id="closeFormBtn">&times;</span>
+                  <p
+                    style="
+                      font-size: 50px;
+                      font-style: normal;
+                      font-weight: 500;
+                    "
+                  >
+                    Join us in our Journey!
+                  </p>
+                  <p
+                    style="
+                      font-size: 20px;
+                      font-style: normal;
+                      font-weight: 400;
+                      color: rgba(112, 112, 112, 0.8);
+                    "
+                  >
+                    Leave your Details and we will contact you!
+                  </p>
+                </div>
+                <div style="margin-top: 30px">
+                  <form
+                    action="#"
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 20px;
+                      align-items: center;
+                    "
+                  >
+                    <div
+                      style="
+                        display: flex;
+                        flex-direction: row;
+                        gap: 16px;
+                        width: 100%;
+                        justify-content: space-between;
+                      "
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          gap: 20px;
+                          width: 48%;
+                        "
+                      >
+                        <div class="input-container">
+                          <input
+                            type="text"
+                            id="BusinessName"
+                            placeholder=" "
+                            class="input-default"
+                          />
+                          <label for="BusinessName">Business Name</label>
+                        </div>
+                        <div class="input-container">
+                          <input
+                            type="text"
+                            id="BusinessEmail"
+                            placeholder=" "
+                            class="input-default"
+                          />
+                          <label for="BusinessEmail">Business Email</label>
+                        </div>
+                        <div class="input-container">
+                          <select id="BusinessType" class="input-default">
+                            <option value=" " hidden selected></option>
+                            <option value="PrivateDoctor">
+                              Private Doctor
+                            </option>
+                            <option value="MentalHealth">
+                              Mental health Service
+                            </option>
+                            <option value="Clinic">Clinic</option>
+                            <option value="MedicalCenter">
+                              Medical Center
+                            </option>
+                            <!-- Add more options here -->
+                          </select>
+                          <label for="BusinessType">Business Type</label>
+                        </div>
                       </div>
-                      <div class="input-container">
-                        <input type="text" id="BusinessEmail" placeholder=" " class="input-default">
-                        <label for="BusinessEmail">Business Email</label>
-                      </div>
-                      <div class="input-container">
-                        <select id="BusinessType" class="input-default">
-                          <option value=" " hidden selected></option>
-                          <option value="PrivateDoctor">Private Doctor</option>
-                          <option value="MentalHealth">Mental health Service</option>
-                          <option value="Clinic">Clinic</option>
-                          <option value="MedicalCenter">Medical Center</option>
-                          <!-- Add more options here -->
-                        </select>
-                        <label for="BusinessType">Business Type</label>
+                      <div
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          gap: 20px;
+                          width: 48%;
+                        "
+                      >
+                        <div class="input-container">
+                          <input
+                            type="text"
+                            id="PhoneNumber"
+                            placeholder=" "
+                            class="input-default"
+                          />
+                          <label for="PhoneNumber">Phone Number</label>
+                        </div>
+                        <div class="input-container">
+                          <input
+                            type="text"
+                            id="BusinessAddress"
+                            placeholder=" "
+                            class="input-default"
+                          />
+                          <label for="BusinessAddress">Business Address</label>
+                        </div>
+                        <div>
+                          <input
+                            type="file"
+                            name="file"
+                            id="file"
+                            class="input-file"
+                          />
+                          <label
+                            for="file"
+                            class="btn btn-tertiary js-labelFile"
+                          >
+                            <span
+                              class="js-fileName"
+                              style="
+                                font-size: 16px;
+                                width: 100%;
+                                font-style: normal;
+                                font-weight: 400;
+                              "
+                              >Upload file</span
+                            >
+                            <icon class="fas fa-plus icon-plus"></icon>
+                          </label>
+                        </div>
                       </div>
                     </div>
-                    <div style="display: flex; flex-direction: column;gap: 20px;width: 48%;">
-                      <div class="input-container">
-                        <input type="text" id="PhoneNumber" placeholder=" " class="input-default">
-                        <label for="PhoneNumber">Phone Number</label>
-                      </div>
-                      <div class="input-container">
-                        <input type="text" id="BusinessAddress" placeholder=" " class="input-default">
-                        <label for="BusinessAddress">Business Address</label>
-                      </div>
-                      <div>
-                        <input type="file" name="file" id="file" class="input-file">
-                        <label for="file" class="btn btn-tertiary js-labelFile">
-                          <span class="js-fileName" style="font-size: 16px;
-                          width:100%;
+                    <textarea
+                      name="message"
+                      placeholder="Leave a message"
+                      style="margin-bottom: 10px; width: 96.5%"
+                    ></textarea>
+                    <button
+                      type="submit"
+                      style="
+                        padding: 16px 8px;
+                        width: 220px;
+                        border-radius: 10px;
+                        background: #ff7415;
+                        outline: unset;
+                        border: 0px;
+                      "
+                    >
+                      <p
+                        style="
+                          font-size: 20px;
                           font-style: normal;
-                          font-weight: 400;">Upload file</span>
-                          <icon class="fas fa-plus icon-plus"></icon>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <textarea name="message" placeholder="Leave a message"
-                    style="margin-bottom: 10px;width: 96.5%;"></textarea>
-                  <button type="submit"
-                    style="padding: 16px 8px;width: 220px;border-radius: 10px;background: #FF7415;outline: unset;border: 0px;">
-                    <p style="font-size: 20px;
-                    font-style: normal;
-                    font-weight: 700;color: #FFF;font-family: DM Sans">Submit
-                      Form</p>
-                  </button>
-                </form>
+                          font-weight: 700;
+                          color: #fff;
+                          font-family: DM Sans;
+                        "
+                      >
+                        Submit Form
+                      </p>
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <img loading="lazy" src="assets/Ellipse8.png" style="position: absolute; width: 10vw;top:0;left: 0;" />
-    <img loading="lazy" src="assets/Ellipse4.png" style="position: absolute; width: 8vw;top:140px;right: 0;" />
-    <img loading="lazy" src="assets/Character04.png" style="position: absolute; width: 16vw;bottom:3vw;right: 3vw;" />
-  </section>
+      <img
+        loading="lazy"
+        src="assets/Ellipse8.png"
+        style="position: absolute; width: 10vw; top: 0; left: 0"
+      />
+      <img
+        loading="lazy"
+        src="assets/Ellipse4.png"
+        style="position: absolute; width: 8vw; top: 140px; right: 0"
+      />
+      <img
+        loading="lazy"
+        src="assets/Character04.png"
+        style="position: absolute; width: 16vw; bottom: 3vw; right: 3vw"
+      />
+    </section>
 
-  <section class="reviews-section">
-    <div class="reviews-container">
-      <p class="reviews-title">What do our Users think</p>
-      <div class="reviews-subcontainer">
-        <div style="text-align: center;">
-          <p class="reviews-title">Hey!</p>
-          <p class="reviews-subtitle">We'd love to hear from you</p>
+    <section class="reviews-section">
+      <div class="reviews-container">
+        <p class="reviews-title">What do our Users think</p>
+        <div class="reviews-subcontainer">
+          <div style="text-align: center">
+            <p class="reviews-title">Hey!</p>
+            <p class="reviews-subtitle">We'd love to hear from you</p>
+          </div>
+          <form
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 39px;
+              width: 100%;
+            "
+          >
+            <div class="star-rating">
+              <span class="star" data-value="5">&#9733;</span>
+              <span class="star" data-value="4">&#9733;</span>
+              <span class="star" data-value="3">&#9733;</span>
+              <span class="star" data-value="2">&#9733;</span>
+              <span class="star" data-value="1">&#9733;</span>
+            </div>
+            <input type="hidden" name="rating" id="rating-value" value="" />
+            <div class="input-container">
+              <input
+                type="text"
+                id="username"
+                placeholder=" "
+                required
+                class="input-default"
+              />
+              <label for="username">Username</label>
+            </div>
+            <div class="input-container">
+              <select id="diagnosis" class="input-default" style="width: 100%">
+                <option value=" " hidden selected></option>
+                <option value="ASD">ASD - Autism Spectrum</option>
+                <option value="Hyperactivity">Hyperactivity</option>
+                <option value="ADHD">ADHD</option>
+                <option value="Dyslexia">Dyslexia</option>
+                <option value="PandasSyndrome">Pandas Syndrome</option>
+                <option value="SpeechDelay">Speech Delay</option>
+                <!-- Add more options here -->
+              </select>
+              <label for="diagnosis">Kid's diagnosis</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="text"
+                id="comment"
+                placeholder=" "
+                required
+                class="input-default"
+              />
+              <label for="comment">Leave a message!</label>
+            </div>
+            <div>
+              <input type="file" name="file1" id="file1" class="input-file1" />
+              <label for="file1" class="btn btn-tertiary js-labelFile1">
+                <span
+                  class="js-fileName1"
+                  style="font-size: 16px; font-style: normal; font-weight: 400"
+                  >Upload file</span
+                >
+                <icon class="fas fa-plus icon-plus"></icon>
+              </label>
+            </div>
+
+            <button type="submit" class="reviews-button">
+              <p>Submit feedback</p>
+            </button>
+          </form>
         </div>
-        <form style="display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 39px;
-        width: 100%;">
-          <div class="star-rating">
-            <span class="star" data-value="5">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="1">&#9733;</span>
+      </div>
+
+      <img
+        src="assets/drawings.png"
+        style="
+          width: 30vw;
+          min-width: 350px;
+          position: absolute;
+          right: 5vw;
+          top: 21vw;
+          z-index: 1;
+        "
+      />
+      <img
+        src="assets/drawings.png"
+        style="
+          width: 30vw;
+          min-width: 350px;
+          position: absolute;
+          left: 5vw;
+          top: 20vw;
+          z-index: 1;
+        "
+      />
+    </section>
+    <section class="big-questions" id="faqs">
+      <div class="questions-container">
+        <p class="section-title">The Big Questions</p>
+        <div class="question-item">
+          <div style="display: flex">
+            <p class="question-text">Who can use GroWonder?</p>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/37da0cb6a00ce6b9240454c62d2d118ffaea3aecf91b688d9176735f67631546?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
+              alt=""
+              class="question-icon"
+            />
           </div>
-          <input type="hidden" name="rating" id="rating-value" value="">
-          <div class="input-container">
-            <input type="text" id="username" placeholder=" " required class="input-default">
-            <label for="username">Username</label>
+          <p
+            style="
+              display: none;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+            "
+            class="answer-text"
+          >
+            GroWonder is a supportive community designed for families raising
+            children with Developmental Delays (DDDs). We connect parents with
+            experienced caregivers, therapists, and doctors, offering a space to
+            share experiences, learn from others, and track a child's
+            developmental journey.
+          </p>
+        </div>
+
+        <div class="question-item">
+          <div style="display: flex">
+            <p class="question-text">How can GroWonder help my child?</p>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/37da0cb6a00ce6b9240454c62d2d118ffaea3aecf91b688d9176735f67631546?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
+              alt=""
+              class="question-icon"
+            />
           </div>
-          <div class="input-container">
-            <select id="diagnosis" class="input-default" style="width: 100%;">
-              <option value=" " hidden selected></option>
-              <option value="ASD">ASD - Autism Spectrum</option>
-              <option value="Hyperactivity">Hyperactivity</option>
-              <option value="ADHD">ADHD</option>
-              <option value="Dyslexia">Dyslexia</option>
-              <option value="PandasSyndrome">Pandas Syndrome</option>
-              <option value="SpeechDelay">Speech Delay</option>
-              <!-- Add more options here -->
-            </select>
-            <label for="diagnosis">Kid's diagnosis</label>
+          <p
+            style="
+              display: none;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+            "
+            class="answer-text"
+          >
+            GroWonder is your partner in raising a child with Developmental
+            Delays. <br /><br />
+            We connect you with a network of experienced professionals who can
+            provide tailored guidance and support. From understanding common
+            causes and symptoms to discovering the latest treatments, GroWonder
+            is your go-to resource. Plus, our digital platform helps you keep
+            track of your child's development without the hassle of paperwork.
+          </p>
+        </div>
+
+        <div class="question-item">
+          <div style="display: flex">
+            <p class="question-text">How do I get started with GroWonder?</p>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ac399811b95526da54e82dd044ec1ae607cad8d2cded3d2ba6b95b0a6139458?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
+              alt=""
+              class="question-icon"
+            />
           </div>
-          <div class="input-container">
-            <input type="text" id="comment" placeholder=" " required class="input-default">
-            <label for="comment">Leave a message!</label>
+          <div
+            style="
+              display: none;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+            "
+            class="answer-text"
+          >
+            <p
+              style="
+                display: none;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+              class="answer-text"
+            >
+              Getting started with GroWonder is simple:
+            </p>
+            <br />
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              1. Download the app: Find GroWonder on your app store and download
+              it to your device.<br />
+            </p>
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              2. Create an account: Register with your preferred email address
+              to access the platform.<br />
+            </p>
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              3. Start exploring: Begin your journey by discovering resources,
+              connecting with other parents, and tracking your child's
+              development.
+            </p>
+          </div>
+        </div>
+
+        <div class="question-item">
+          <div style="display: flex">
+            <p class="question-text">How can I contribute to GroWonder?</p>
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ac399811b95526da54e82dd044ec1ae607cad8d2cded3d2ba6b95b0a6139458?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
+              alt=""
+              class="question-icon"
+            />
+          </div>
+
+          <div
+            style="
+              display: none;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+            "
+            class="answer-text"
+          >
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              Your involvement is crucial to the success of GroWonder. Here's
+              how you can contribute:<br /><br />
+            </p>
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              - Share your experience: Provide honest feedback and reviews about
+              your journey with GroWonder. Your insights help us improve our
+              platform and better serve the community.<br />
+            </p>
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              - Become a GrowWonder ambassador: Spread the word about GroWonder
+              to other parents and caregivers in need of support. Your
+              recommendations can make a significant difference.<br />
+            </p>
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              - Engage with the community: Actively participate in discussions,
+              share knowledge, and offer support to fellow members. Your
+              contributions foster a strong and supportive community.<br />
+            </p>
+            <br />
+            <p
+              style="
+                text-indent: -20px;
+                padding-left: 20px;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+              "
+            >
+              Together, we can create a thriving platform for families facing
+              the challenges of raising children with developmental delays.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer-container">
+      <div class="wrapper">
+        <div class="content-container">
+          <div
+            style="
+              width: 50vw;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            "
+          >
+            <img
+              loading="lazy"
+              src="assets/Vector.png"
+              alt="Description of the image"
+              class="footer-image"
+            />
+          </div>
+          <div
+            style="
+              width: 50vw;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-around;
+            "
+          >
+            <div class="links-container">
+              <div class="link-header">Site Map</div>
+              <a
+                class="link-item"
+                href="javascript:void(0);"
+                onclick="scrollToSection('solutions')"
+                >Our Solutions</a
+              >
+              <a
+                class="link-item"
+                href="javascript:void(0);"
+                onclick="scrollToSection('faqs')"
+                >FAQS</a
+              >
+              <a class="link-item" href="#">Resources</a>
+            </div>
+            <div class="social-container">
+              <div class="social-header">Our Socials</div>
+              <a class="social-item">Linkedin</a>
+              <a class="social-item">Instagram</a>
+              <a class="social-item">Facebook</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-notes">
+          <div>
+            <a href="/privacy.html" class="link">Privacy Policy</a> |
+            <a href="/terms.html" class="link">Terms & Conditions </a> | © 2024
+            All Rights Reserved
           </div>
           <div>
-            <input type="file" name="file1" id="file1" class="input-file1">
-            <label for="file1" class="btn btn-tertiary js-labelFile1">
-              <span class="js-fileName1" style="font-size: 16px;
-              font-style: normal;
-              font-weight: 400;">Upload file</span>
-              <icon class="fas fa-plus icon-plus"></icon>
-            </label>
-          </div>
-
-          <button type="submit" class="reviews-button">
-            <p>Submit feedback</p>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <img src="assets/drawings.png" style="width: 30vw;min-width: 350px;position: absolute;right: 5vw;top:21vw; z-index: 1;" />
-    <img src="assets/drawings.png" style="width: 30vw;min-width: 350px;position: absolute;left: 5vw;top:20vw; z-index: 1;" />
-  </section>
-  <section class="big-questions" id="faqs">
-    <div class="questions-container">
-      <p class="section-title">The Big Questions</p>
-      <div class="question-item">
-        <div style="display: flex;">
-          <p class="question-text">Who can use GroWonder?</p>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/37da0cb6a00ce6b9240454c62d2d118ffaea3aecf91b688d9176735f67631546?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
-            alt="" class="question-icon" />
-        </div>
-        <p style="display: none; font-size: 20px; font-style: normal; font-weight: 400;" class="answer-text">GroWonder
-          is a supportive community designed for families raising children with Developmental Delays (DDDs). We connect
-          parents with experienced caregivers, therapists, and doctors, offering a space to share experiences, learn
-          from others, and track a child's developmental journey.</p>
-      </div>
-
-      <div class="question-item">
-        <div style="display: flex;">
-          <p class="question-text">How can GroWonder help my child?</p>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/37da0cb6a00ce6b9240454c62d2d118ffaea3aecf91b688d9176735f67631546?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
-            alt="" class="question-icon" />
-        </div>
-        <p style="display: none; font-size: 20px; font-style: normal; font-weight: 400;" class="answer-text">GroWonder
-          is your partner in raising a child with Developmental Delays. <br><br>
-          We connect you with a network of experienced professionals who can provide tailored guidance and support. From
-          understanding common causes and symptoms to discovering the latest treatments, GroWonder is your go-to
-          resource. Plus, our digital platform helps you keep track of your child's development without the hassle of
-          paperwork.
-        </p>
-      </div>
-
-      <div class="question-item">
-        <div style="display: flex;">
-          <p class="question-text">How do I get started with GroWonder?</p>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ac399811b95526da54e82dd044ec1ae607cad8d2cded3d2ba6b95b0a6139458?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
-            alt="" class="question-icon" />
-        </div>
-        <div style="display: none; font-size: 20px; font-style: normal; font-weight: 400;" class="answer-text">
-          <p style="display: none; font-size: 20px; font-style: normal; font-weight: 400;" class="answer-text">Getting
-            started with GroWonder is simple: </p><br>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">1.
-            Download the app: Find GroWonder on your app store and download it to your device.<br>
-          </p>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">2.
-            Create an account: Register with your preferred email address to access the platform.<br>
-          </p>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">3.
-            Start exploring: Begin your journey by discovering resources, connecting with other parents, and tracking
-            your child's development.
-          </p>
-        </div>
-      </div>
-
-      <div class="question-item">
-        <div style="display: flex;">
-          <p class="question-text">How can I contribute to GroWonder?</p>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/9ac399811b95526da54e82dd044ec1ae607cad8d2cded3d2ba6b95b0a6139458?apiKey=18c10655b2d0493cbd4fae1ef216046e&&apiKey=18c10655b2d0493cbd4fae1ef216046e"
-            alt="" class="question-icon" />
-        </div>
-
-        <div style="display: none; font-size: 20px; font-style: normal; font-weight: 400;" class="answer-text">
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;"> Your
-            involvement is crucial to the success of GroWonder. Here's how you can contribute:<br><br></p>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">
-            - Share your experience: Provide honest feedback and reviews about your journey with GroWonder. Your
-            insights
-            help us improve our platform and better serve the community.<br>
-          </p>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">-
-            Become
-            a GrowWonder ambassador: Spread the word about GroWonder to other parents and caregivers in need of
-            support. Your recommendations can make a significant difference.<br>
-          </p>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">-
-            Engage
-            with the community: Actively participate in discussions, share knowledge, and offer support to
-            fellow
-            members. Your contributions foster a strong and supportive community.<br>
-          </p>
-          <br>
-          <p style="text-indent: -20px;padding-left: 20px;font-size: 20px; font-style: normal; font-weight: 400;">
-            Together, we can create a thriving platform for families facing the challenges of raising children with
-            developmental delays.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="footer-container">
-    <div class="wrapper">
-      <div class="content-container">
-        <div style="width: 50vw;display: flex;flex-direction: row;justify-content: center;">
-          <img loading="lazy" src="assets/Vector.png" alt="Description of the image" class="footer-image" />
-        </div>
-        <div style="width: 50vw;display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
-          <div class="links-container">
-            <div class="link-header">Site Map</div>
-            <a class="link-item" href="javascript:void(0);" onclick="scrollToSection('solutions')">Our Solutions</a>
-            <a class="link-item" href="javascript:void(0);" onclick="scrollToSection('faqs')">FAQS</a>
-            <a class="link-item" href="#">Resources</a>
-          </div>
-          <div class="social-container">
-            <div class="social-header">Our Socials</div>
-            <a class="social-item">Linkedin</a>
-            <a class="social-item">Instagram</a>
-            <a class="social-item">Facebook</a>
+            <p style="color: #7f28ff">GroWonder@gmail.com</p>
           </div>
         </div>
       </div>
-      <div class="footer-notes">
-        <div>
-          <a href="#" class="link">Privacy Policy</a> |
-          <a href="#" class="link">Terms of Use</a> |
-          © 2024 All Rights Reserved
-        </div>
-        <div>
-          <p style="color: #7f28ff;">GroWonder@gmail.com</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function scrollToSection(section) {
+        document.getElementById(section).scrollIntoView({ behavior: "smooth" });
+      }
 
-    function scrollToSection(section) {
-      document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
-    }
+      var popupForm = document.getElementById("popupForm");
 
-    var popupForm = document.getElementById("popupForm");
+      // Get the button that opens the modal
+      var openFormBtn = document.getElementById("openFormBtn");
 
-    // Get the button that opens the modal
-    var openFormBtn = document.getElementById("openFormBtn");
+      // Get the <span> element that closes the modal
+      var closeFormBtn = document.getElementById("closeFormBtn");
 
-    // Get the <span> element that closes the modal
-    var closeFormBtn = document.getElementById("closeFormBtn");
+      // When the user clicks the button, open the modal
+      openFormBtn.onclick = function () {
+        popupForm.style.display = "block";
+      };
 
-    // When the user clicks the button, open the modal 
-    openFormBtn.onclick = function () {
-      popupForm.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    closeFormBtn.onclick = function () {
-      popupForm.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == popupForm) {
+      // When the user clicks on <span> (x), close the modal
+      closeFormBtn.onclick = function () {
         popupForm.style.display = "none";
-      }
-    }
+      };
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const stars = document.querySelectorAll('.star');
-      stars.forEach(star => {
-        star.addEventListener('click', selectStar);
-      });
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == popupForm) {
+          popupForm.style.display = "none";
+        }
+      };
 
-      function selectStar(e) {
-        const value = e.target.getAttribute('data-value');
-        stars.forEach(star => {
-          star.classList.remove('selected');
-          if (star.getAttribute('data-value') <= value) {
-            star.classList.add('selected');
-          }
+      document.addEventListener("DOMContentLoaded", function () {
+        const stars = document.querySelectorAll(".star");
+        stars.forEach((star) => {
+          star.addEventListener("click", selectStar);
         });
-      }
-    });
-  </script>
-  <script>
-    (function () {
-      'use strict';
 
-      $('.input-file1').each(function () {
-        var $input = $(this),
-          $label = $input.next('.js-labelFile1'),
-          labelVal = $label.find('.js-fileName1').html();
+        function selectStar(e) {
+          const value = e.target.getAttribute("data-value");
+          stars.forEach((star) => {
+            star.classList.remove("selected");
+            if (star.getAttribute("data-value") <= value) {
+              star.classList.add("selected");
+            }
+          });
+        }
+      });
+    </script>
+    <script>
+      (function () {
+        "use strict";
 
-        $input.on('change', function () {
-          var fileName = '';
-          if ($input[0].files.length > 0) {
-            fileName = $input[0].files[0].name;
-          }
-          if (fileName) {
-            $label.addClass('has-file').find('.js-fileName1').html(fileName);
-          } else {
-            $label.removeClass('has-file').find('.js-fileName1').html(labelVal);
-          }
+        $(".input-file1").each(function () {
+          var $input = $(this),
+            $label = $input.next(".js-labelFile1"),
+            labelVal = $label.find(".js-fileName1").html();
+
+          $input.on("change", function () {
+            var fileName = "";
+            if ($input[0].files.length > 0) {
+              fileName = $input[0].files[0].name;
+            }
+            if (fileName) {
+              $label.addClass("has-file").find(".js-fileName1").html(fileName);
+            } else {
+              $label
+                .removeClass("has-file")
+                .find(".js-fileName1")
+                .html(labelVal);
+            }
+          });
+        });
+      })();
+
+      (function () {
+        "use strict";
+
+        $(".input-file").each(function () {
+          var $input = $(this),
+            $label = $input.next(".js-labelFile"),
+            labelVal = $label.find(".js-fileName").html();
+
+          $input.on("change", function () {
+            var fileName = "";
+            if ($input[0].files.length > 0) {
+              fileName = $input[0].files[0].name;
+            }
+            if (fileName) {
+              $label.addClass("has-file").find(".js-fileName").html(fileName);
+            } else {
+              $label
+                .removeClass("has-file")
+                .find(".js-fileName")
+                .html(labelVal);
+            }
+          });
+        });
+      })();
+
+      $(document).ready(function () {
+        $(".question-item").click(function () {
+          $(this).find(".answer-text").toggle();
         });
       });
-
-    })();
-
-    (function () {
-      'use strict';
-
-      $('.input-file').each(function () {
-        var $input = $(this),
-          $label = $input.next('.js-labelFile'),
-          labelVal = $label.find('.js-fileName').html();
-
-        $input.on('change', function () {
-          var fileName = '';
-          if ($input[0].files.length > 0) {
-            fileName = $input[0].files[0].name;
-          }
-          if (fileName) {
-            $label.addClass('has-file').find('.js-fileName').html(fileName);
-          } else {
-            $label.removeClass('has-file').find('.js-fileName').html(labelVal);
-          }
-        });
-      });
-
-    })();
-
-    $(document).ready(function () {
-      $('.question-item').click(function () {
-        $(this).find('.answer-text').toggle();
-      });
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

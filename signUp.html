@@ -306,7 +306,7 @@
 
         passwordInput.addEventListener("input", function () {
           validatePassword();
-          validatePasswordMatch(); 
+          validatePasswordMatch();
         });
 
         rePasswordInput.addEventListener("input", validatePasswordMatch);
@@ -315,7 +315,7 @@
           .getElementById("createAccount")
           .addEventListener("submit", function (event) {
             if (!validatePassword() || !validatePasswordMatch()) {
-              event.preventDefault(); 
+              event.preventDefault();
             }
           });
       });
